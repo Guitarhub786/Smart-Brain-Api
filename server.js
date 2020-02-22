@@ -1,9 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const cors = require('cors');
 
 const app = express();
 
-app.use(express.json());
 const database = {
   users: [
     {
@@ -25,6 +26,9 @@ const database = {
   ]
 }
 
+app.use(cors());
+app.use(express.json());
+
 app.get('/', (req, res) => {
   res.send(database.users);
 })
@@ -32,9 +36,9 @@ app.get('/', (req, res) => {
 app.post('/signin', (req, res) => {
   if (req.body.email === database.users[0].email &&
     req.body.password === database.users[0].password) {
-    res.json('success');
+    res.json(database.users[0]);
   } else {
-    res.status(400).json('error loggin in')
+    res.status(400).json('error logging in')
   }
 })
 
@@ -44,7 +48,6 @@ app.post('/register', (req, res) => {
     id: '125',
     name: name,
     email: email,
-    password: password,
     entries: 0,
     joined: new Date()
   })
@@ -57,7 +60,7 @@ app.get('/profile/:id', (req, res) => {
   database.users.forEach(user => {
     if (user.id === id) {
       found = true;
-      res.json(user);
+      return res.json(user);
     }
   })
   if (!found) {
@@ -66,7 +69,7 @@ app.get('/profile/:id', (req, res) => {
 })
 
 // rem this should be PUT
-app.post('/image', (req, res) => {
+app.put('/image', (req, res) => {
   const { id } = req.body;
   let found = false;
   database.users.forEach(user => {
