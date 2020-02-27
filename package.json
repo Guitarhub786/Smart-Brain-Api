@@ -1,7 +1,7 @@
 {
   "name": "smart-brain-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Back-end for SmartBrain",
   "main": "index.js",
   "scripts": {
     "start": "node server.js"
@@ -20,5 +20,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guitarhub786/Smart-Brain-Api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/guitarhub786/Smart-Brain-Api/issues"
+  },
+  "homepage": "https://github.com/guitarhub786/Smart-Brain-Api#readme"
 }
